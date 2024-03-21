@@ -1,0 +1,45 @@
+class Solution {
+/*
+258.各位相加
+给定一个非负整数 num，反复将各个位上的数字相加，直到结果为一位数。返回这个结果。
+*/
+  public int addDigits(int num) {
+    if(num < 10) {
+      return num;
+    }
+    num = (num / 10) + (num % 10);
+    return addDigits(num);
+  }
+
+/*
+263.丑数
+丑数 就是只包含质因数 2、3 和 5 的正整数。
+给你一个整数 n ，请你判断 n 是否为 丑数 。如果是，返回 true ；否则，返回 false 。
+*/
+  public boolean isUgly(int n) {
+    if(n <= 0) {
+      return false;
+    }
+    int[] nums = {2, 3, 5};
+    for(int num : nums) {
+      if(n % num == 0) {
+        n /= num;
+      }
+    }
+    return n == 1;
+  }
+/*
+268.丢失的数字
+给定一个包含 [0, n] 中 n 个数的数组 nums ，找出 [0, n] 这个范围内没有出现在数组中的那个数。
+*/
+  public int missingNumber(int[] nums) {
+    int ans = 0;
+    for(int i = 0; i < nums.length; i++) {
+      ans ^= nums[i];
+    }
+    for(int i = 0; i < nums.length + 1; i++) {
+      ans ^= i;
+    }
+    return  ans;
+  }
+}
